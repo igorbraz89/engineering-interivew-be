@@ -11,7 +11,14 @@ const accounts = {
     retrieve: sql('accounts/retrieve.sql'),
     retrieveAccountByUserName: sql('accounts/retrieveAccountByUserName.sql'),
 }
+const tasks = {
+    create: sql('tasks/create.sql'),
+    retrieve: sql('tasks/retrieve.sql'),
+    delete: sql('tasks/delete.sql'),
+    update: sql('tasks/update.sql'),
+}
 
 export {
-    accounts
+    accounts,
+    tasks,
 };

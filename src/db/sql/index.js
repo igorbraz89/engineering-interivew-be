@@ -19,7 +19,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 exports.__esModule = true;
-exports.accounts = void 0;
+exports.tasks = exports.accounts = void 0;
 var path = __importStar(require("path"));
 var pg_promise_1 = require("pg-promise");
 function sql(file, params) {
@@ -32,3 +32,10 @@ var accounts = {
     retrieveAccountByUserName: sql('accounts/retrieveAccountByUserName.sql')
 };
 exports.accounts = accounts;
+var tasks = {
+    create: sql('tasks/create.sql'),
+    retrieve: sql('tasks/retrieve.sql'),
+    "delete": sql('tasks/delete.sql'),
+    update: sql('tasks/update.sql')
+};
+exports.tasks = tasks;

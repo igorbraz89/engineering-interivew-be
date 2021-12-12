@@ -54,7 +54,6 @@ var setUpPassport = function (db) {
                     return [4 /*yield*/, (0, accounts_1.retrieveAccountByUserName)(db, userName, password)];
                 case 1:
                     validAccount = _b.sent();
-                    console.log('validAccount', validAccount);
                     if (!validAccount) {
                         return [2 /*return*/, done(null, false)];
                     }
@@ -75,7 +74,6 @@ var setUpPassport = function (db) {
                     return [4 /*yield*/, (0, accounts_1.retrieveAccountByUserName)(db, userName)];
                 case 1:
                     existingAccount = _a.sent();
-                    console.log('existingAccount', existingAccount);
                     if (existingAccount) {
                         return [2 /*return*/, done(new errors_1.ConflictError('Another account with the same user name already exists', 'userName'), null)];
                     }

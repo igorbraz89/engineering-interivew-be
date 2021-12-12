@@ -32,7 +32,7 @@ var helmet = __importStar(require("helmet"));
 var db_1 = require("./db/db");
 var passport_setup_1 = __importDefault(require("./passport-setup"));
 var auth_1 = __importDefault(require("./routes/auth"));
-var test_1 = __importDefault(require("./routes/test"));
+var tasks_1 = __importStar(require("./routes/tasks"));
 var db = (0, db_1.getDb)();
 var app = (0, express_1["default"])();
 // Helmet security middleware -  It's easy to configure and provides a good set of validations to prevent common attacks
@@ -91,7 +91,8 @@ app.use(function (req, res, next) {
     next();
 });
 app.use('/api/auth', auth_1["default"]);
-app.use('/api/test', test_1["default"]);
+app.use('/api/task/:taskId', tasks_1.taskRouter);
+app.use('/api/tasks', tasks_1["default"]);
 if (process.env.NODE_ENV === 'production') {
     app.use((0, morgan_1["default"])('common', {
         stream: fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })

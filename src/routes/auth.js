@@ -28,7 +28,6 @@ var passport_1 = __importDefault(require("passport"));
 var dotenv = __importStar(require("dotenv"));
 dotenv.config();
 var authenticateIfAuthorized = function (strategy) { return function (req, res, next) {
-    console.log('authenticateIfAuthorized');
     passport_1["default"].authenticate(strategy, function (err, user) {
         if (err) {
             return next(err);
@@ -58,12 +57,10 @@ var ensureAuthenticated = function (req, res, next) {
 exports.ensureAuthenticated = ensureAuthenticated;
 function handleSignUp(req, res, next) {
     passport_1["default"].authenticate('signup', function (err, user) {
-        console.log('signup');
         if (err) {
             // TODO: redirect to the error page when it will be implemented
             return next(err);
         }
-        console.log('user', user);
         if (!user.authorized) {
             return res.status(202).json(user);
         }

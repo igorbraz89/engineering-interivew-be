@@ -7,7 +7,9 @@ type AccountDBType = {
   name: string;
   userName: string;
 }
-
+type SavedAccount = {
+  id: number
+} & AccountDBType;
 const SALT_ROUNDS = 10;
 
 const validName = Joi.string().min(2);
@@ -51,3 +53,4 @@ async function retrieveAccountByUserName(db: ExtendedProtocolDB, userName, txtPa
   return mapRow(retrievedAccount);
 }
 export { createAccount, retrieveAccountByUserName }
+export type { SavedAccount }

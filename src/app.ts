@@ -8,7 +8,7 @@ import * as helmet from 'helmet';
 import { getDb } from './db/db';
 import setUpPassport from './passport-setup';
 import authRouter from './routes/auth';
-import testRouter from "./routes/test";
+import tasksRouter, { taskRouter } from "./routes/tasks";
 
 const db = getDb();
 const app = express();
@@ -81,7 +81,9 @@ app.use((req, res, next) => {
   next();
 });
 app.use('/api/auth', authRouter);
-app.use('/api/test', testRouter);
+app.use('/api/task/:taskId', taskRouter);
+app.use('/api/tasks', tasksRouter);
+
 
 if (process.env.NODE_ENV === 'production') {
   app.use(

@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "NODE_PATH=./build node ./build/index.js",
-    "start:dev": "nodemon",
+    "start:dev": "yarn build && nodemon",
     "build": "tsc && yarn postbuild",
     "postbuild": "copyfiles -u 1 src/**/*.sql build",
     "migrate": "yarn build && ts-node-script src/bin/run-migrations.ts",

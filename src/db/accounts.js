@@ -100,7 +100,6 @@ function createAccount(db, account, password) {
                     return [4 /*yield*/, (0, bcrypt_1.hash)(password, SALT_ROUNDS)];
                 case 2:
                     hashPassword = _a.sent();
-                    console.log(password, bcrypt_1.hash);
                     return [4 /*yield*/, db.one(sql_1.accounts.create, __assign(__assign({}, account), { password: hashPassword }))];
                 case 3:
                     id = (_a.sent()).id;
@@ -115,17 +114,13 @@ function retrieveAccountByUserName(db, userName, txtPasw) {
         var retrievedAccount, correctPassword, _a;
         return __generator(this, function (_b) {
             switch (_b.label) {
-                case 0:
-                    console.log('userName', userName, txtPasw);
-                    return [4 /*yield*/, db.oneOrNone(sql_1.accounts.retrieveAccountByUserName, { userName: userName })];
+                case 0: return [4 /*yield*/, db.oneOrNone(sql_1.accounts.retrieveAccountByUserName, { userName: userName })];
                 case 1:
                     retrievedAccount = _b.sent();
-                    console.log('retrievedAccount', retrievedAccount);
                     if (!retrievedAccount) {
                         return [2 /*return*/, null];
                     }
                     if (!txtPasw) return [3 /*break*/, 4];
-                    console.log('compare');
                     _a = (retrievedAccount === null || retrievedAccount === void 0 ? void 0 : retrievedAccount.password);
                     if (!_a) return [3 /*break*/, 3];
                     return [4 /*yield*/, (0, bcrypt_1.compare)(txtPasw, retrievedAccount === null || retrievedAccount === void 0 ? void 0 : retrievedAccount.password)];
