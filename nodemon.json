@@ -1,0 +1,7 @@
+{
+  "verbose": true,
+  "watch": ["src"],
+  "ext": "ts,sql",
+  "ignore": ["src/**/*.test.ts"],
+  "exec": "NODE_PATH=./src ts-node -r dotenv/config ./src/index.ts"
+}

@@ -1,3 +1,12 @@
+# Miro's board to follow up the challenge brainstorming
+https://miro.com/app/board/uXjVOb9JShc=/?invite_link_id=867348560105
+
+# How to install
+
+# How to run
+
+# How to test
+
 # Getting Started with the Every.io engineering challenge.
 
 Thanks for taking the time to complete the Every.io code challenge. Don't worry, it's not too hard, and please do not spend more than an hour or two. We know you have lots of these to do, and it can be very time consuming.
