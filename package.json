@@ -13,7 +13,11 @@
     "test": "jest --env=node --forceExit && yarn test:db",
     "test:db": "cross-env DATABASE_SSL=false jest --config=jest.db.config.js --runInBand",
     "migrate": "yarn build && ts-node-script src/bin/run-migrations.ts",
-    "type-check": "tsc --noEmit -p ."
+    "type-check": "tsc --noEmit -p .",
+    "docker-build": "docker build -t taskmanager/igorbraz .",
+    "run-docker": "yarn run docker-app && yarn run docker-postgres",
+    "docker-app": "docker run -p 3001:3001 -d taskmanager/igorbraz",
+    "docker-postgres": "docker run -e POSTGRES_PASSWORD=password -d -p 5432:5433 postgres:11.7"
   },
   "dependencies": {
     "@types/express": "^4.17.13",

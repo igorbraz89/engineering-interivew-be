@@ -1,0 +1,36 @@
+version: '3'
+services:
+  postgres:
+    image: 'postgres:11.7'
+    restart: 'always'
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+  tm-app:
+    image: taskmanager/igorbraz:latest
+    ports:
+      - '80:3001'
+    env_file:
+      - ./.env
+    environment:
+      - DATABASE_URL=tcp://postgres:password@postgres:5432/postgres
+      - DATABASE_SSL=false
+      - DISABLE_HTTPS=true
+    links:
+      - postgres
+    depends_on:
+      - postgres
+  migration:
+    image: taskmanager/igorbraz:latest
+    command: ['./node_modules/.bin/ts-node', 'bin/run-migrations.ts']
+    environment:
+      - DATABASE_URL=tcp://postgres:password@postgres:5432/postgres
+      - DATABASE_SSL=false
+    links:
+      - postgres
+    depends_on:
+      - postgres
+volumes:
+  db-data:
+    driver: local
