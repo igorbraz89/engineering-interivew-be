@@ -21,6 +21,8 @@ DISABLE_HTTPS=true
 - yarn test
 
 # Build and Run with Docker
+- yarn docker-build
+- yarn run-docker
 
 # Getting Started with the Every.io engineering challenge.
 
