@@ -9,7 +9,7 @@
     "start": "NODE_PATH=./build node ./build/index.js",
     "start:dev": "yarn build && nodemon",
     "build": "tsc && yarn postbuild",
-    "postbuild": "copyfiles -u 1 src/**/*.sql build",
+    "postbuild": "copyfiles -u 1 src/**/*.js build",
     "test:db": "cross-env DATABASE_SSL=false jest --config=jest.db.config.js --runInBand",
     "migrate": "yarn build && ts-node-script src/bin/run-migrations.ts",
     "type-check": "tsc --noEmit -p ."
