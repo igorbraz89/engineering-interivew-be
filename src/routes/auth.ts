@@ -21,7 +21,7 @@ const authenticateIfAuthorized = (strategy: string) => (req, res, next) => {
                 if (loginErr) {
                     return next(loginErr);
                 }
-                return res.redirect(303, '/');
+                return res.json(user);
             });
         });
     })(req, res, next);

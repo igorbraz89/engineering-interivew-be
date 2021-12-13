@@ -1,7 +1,7 @@
 module.exports = {
   clearMocks: true,
   collectCoverage: true,
-  moduleFileExtensions: ['ts'],
+  moduleFileExtensions: ['js', 'ts'],
   roots: ['<rootDir>/src'],
   testMatch: ['<rootDir>/src/**/?(*.)(spec|test).{js,ts}'],
   verbose: true,

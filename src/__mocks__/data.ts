@@ -11,8 +11,8 @@ function nextId(seq) {
 
 const accountsData = [
     {
-        name: 'Igor',
-        userName: 'braz',
+        name: 'Tester',
+        userName: 'test',
     }
 ]
 const accountsRef = accountsData.map((acc) => (

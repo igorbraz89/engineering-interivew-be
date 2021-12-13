@@ -10,6 +10,7 @@
     "start:dev": "yarn build && nodemon",
     "build": "tsc && yarn postbuild",
     "postbuild": "copyfiles -u 1 src/**/*.sql build",
+    "test": "jest --env=node --forceExit && yarn test:db",
     "test:db": "cross-env DATABASE_SSL=false jest --config=jest.db.config.js --runInBand",
     "migrate": "yarn build && ts-node-script src/bin/run-migrations.ts",
     "type-check": "tsc --noEmit -p ."
@@ -48,6 +49,7 @@
     "pg-tmp": "^0.2.0",
     "postgrator": "^4.2.0",
     "prettier": "^2.5.1",
+    "supertest": "^6.1.6",
     "ts-jest": "^27.1.1",
     "ts-node": "^10.4.0",
     "tsc-alias": "^1.4.2",
