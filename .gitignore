@@ -108,4 +108,3 @@ dist
 .yarn/cache
 .yarn/*.gz
 build/*
-src/**/*.js

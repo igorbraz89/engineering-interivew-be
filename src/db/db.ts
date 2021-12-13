@@ -46,7 +46,6 @@ const initOptions: IInitOptions<IExtensions> = {
 const pgp: IMain = pgPromise(initOptions);
 
 function getDb(dbUrl?: string): ExtendedProtocolDB {
-    console.log('dbUrl', dbUrl);
     const db = pgp({
         connectionString: dbUrl || process.env.DATABASE_URL,
         ...((!process.env.DATABASE_SSL || process.env.DATABASE_SSL === 'true') && {
