@@ -46,6 +46,7 @@ const initOptions: IInitOptions<IExtensions> = {
 const pgp: IMain = pgPromise(initOptions);
 
 function getDb(dbUrl?: string): ExtendedProtocolDB {
+    console.log('dbUrl', dbUrl);
     const db = pgp({
         connectionString: dbUrl || process.env.DATABASE_URL,
         ...((!process.env.DATABASE_SSL || process.env.DATABASE_SSL === 'true') && {
@@ -58,7 +59,6 @@ function getDb(dbUrl?: string): ExtendedProtocolDB {
 }
 
 async function migrate(to: string, dbUrl?: string) {
-    const client = getDb();
     const options: any = {
         connectionString: dbUrl || process.env.DATABASE_URL,
         driver: 'pg',
@@ -69,7 +69,6 @@ async function migrate(to: string, dbUrl?: string) {
                 rejectUnauthorized: false,
             },
         }),
-        execQuery: (query) => client.query(query),
         validateChecksums: false, // Needed because of how checksums are calculated for JS migrations
     };
     const postgrator = new Postgrator(options);

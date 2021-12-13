@@ -39,6 +39,11 @@ async function createAccount(db: ExtendedProtocolDB, account: AccountDBType, pas
   const { id } = await db.one(accounts.create, { ...account, password: hashPassword });
   return id;
 }
+
+async function updateAccount(db: ExtendedProtocolDB, account: SavedAccount) {
+  return await db.one(accounts.update, { ...account }, mapRow);
+}
+
 async function retrieveAccountByUserName(db: ExtendedProtocolDB, userName, txtPasw?) {
   const retrievedAccount = await db.oneOrNone(accounts.retrieveAccountByUserName, {userName});
   if (!retrievedAccount) {
@@ -52,5 +57,5 @@ async function retrieveAccountByUserName(db: ExtendedProtocolDB, userName, txtPa
   }
   return mapRow(retrievedAccount);
 }
-export { createAccount, retrieveAccountByUserName }
+export { createAccount, updateAccount, retrieveAccountByUserName }
 export type { SavedAccount }

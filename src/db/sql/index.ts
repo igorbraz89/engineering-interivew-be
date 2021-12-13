@@ -8,6 +8,7 @@ function sql(file, params?) {
 
 const accounts = {
     create: sql('accounts/create.sql'),
+    update: sql('accounts/update.sql'),
     retrieve: sql('accounts/retrieve.sql'),
     retrieveAccountByUserName: sql('accounts/retrieveAccountByUserName.sql'),
 }

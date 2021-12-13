@@ -1,13 +1,17 @@
 import { compare, hash } from 'bcrypt';
 import * as Joi from 'joi';
-import { ExtendedProtocolDB } from './db';
+import {AuthorFieldsDBType, ExtendedProtocolDB} from './db';
 import {accounts, tasks} from "./sql";
 import {SavedAccount} from "./accounts";
 
 type TaskDBType = {
   name: string;
-  status: 'to-do' | 'in-progress' | 'done' | 'archived';
+  status: 'to_do' | 'in_progress' | 'done' | 'archived';
 }
+
+type SavedTaskDBType = {
+  id: number;
+} & TaskDBType & AuthorFieldsDBType;
 
 function mapRow(row) {
   return (row && {
@@ -19,16 +23,17 @@ function mapRow(row) {
   });
 }
 
-async function createTask(db: ExtendedProtocolDB, { id: accountId }: SavedAccount, task: TaskDBType): Promise<TaskDBType>{
+async function createTask(db: ExtendedProtocolDB, { id: accountId }: SavedAccount, task: TaskDBType): Promise<SavedTaskDBType>{
   return await db.one(tasks.create, { ...task, accountId }, mapRow);
 }
-async function updateTask(db: ExtendedProtocolDB, { id: accountId }: SavedAccount, task: TaskDBType): Promise<TaskDBType>{
+async function updateTask(db: ExtendedProtocolDB, { id: accountId }: SavedAccount, task: TaskDBType): Promise<SavedTaskDBType>{
   return await db.one(tasks.update, { ...task, accountId }, mapRow);
 }
-async function deleteTask(db: ExtendedProtocolDB, { id: accountId }: SavedAccount, taskId: number): Promise<TaskDBType>{
+async function deleteTask(db: ExtendedProtocolDB, { id: accountId }: SavedAccount, taskId: number): Promise<SavedTaskDBType>{
   return await db.one(tasks.delete, { id: taskId, accountId }, mapRow);
 }
-async function retrieveTasksByUser(db: ExtendedProtocolDB, { id: accountId }: SavedAccount): Promise<TaskDBType[]> {
+async function retrieveTasksByUser(db: ExtendedProtocolDB, { id: accountId }: SavedAccount): Promise<SavedTaskDBType[]> {
   return db.map(tasks.retrieve, { accountId }, mapRow);
 }
 export { createTask, updateTask, deleteTask, retrieveTasksByUser };
+export type { TaskDBType, SavedTaskDBType };

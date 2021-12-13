@@ -66,7 +66,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.retrieveAccountByUserName = exports.createAccount = void 0;
+exports.retrieveAccountByUserName = exports.updateAccount = exports.createAccount = void 0;
 var bcrypt_1 = require("bcrypt");
 var Joi = __importStar(require("joi"));
 var sql_1 = require("./sql");
@@ -109,6 +109,17 @@ function createAccount(db, account, password) {
     });
 }
 exports.createAccount = createAccount;
+function updateAccount(db, account) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, db.one(sql_1.accounts.update, __assign({}, account), mapRow)];
+                case 1: return [2 /*return*/, _a.sent()];
+            }
+        });
+    });
+}
+exports.updateAccount = updateAccount;
 function retrieveAccountByUserName(db, userName, txtPasw) {
     return __awaiter(this, void 0, void 0, function () {
         var retrievedAccount, correctPassword, _a;

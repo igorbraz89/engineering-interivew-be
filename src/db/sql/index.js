@@ -28,6 +28,7 @@ function sql(file, params) {
 }
 var accounts = {
     create: sql('accounts/create.sql'),
+    update: sql('accounts/update.sql'),
     retrieve: sql('accounts/retrieve.sql'),
     retrieveAccountByUserName: sql('accounts/retrieveAccountByUserName.sql')
 };

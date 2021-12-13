@@ -123,6 +123,7 @@ var initOptions = {
 };
 var pgp = (0, pg_promise_1["default"])(initOptions);
 function getDb(dbUrl) {
+    console.log('dbUrl', dbUrl);
     var db = pgp(__assign({ connectionString: dbUrl || process.env.DATABASE_URL }, ((!process.env.DATABASE_SSL || process.env.DATABASE_SSL === 'true') && {
         ssl: {
             rejectUnauthorized: false
@@ -133,16 +134,15 @@ function getDb(dbUrl) {
 exports.getDb = getDb;
 function migrate(to, dbUrl) {
     return __awaiter(this, void 0, void 0, function () {
-        var client, options, postgrator, err_1;
+        var options, postgrator, err_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    client = getDb();
                     options = __assign(__assign({ connectionString: dbUrl || process.env.DATABASE_URL, driver: 'pg', migrationPattern: "".concat(__dirname, "/migrations/*.sql"), schemaTable: 'public.schemaversion2' }, ((!process.env.DATABASE_SSL || process.env.DATABASE_SSL === 'true') && {
                         ssl: {
                             rejectUnauthorized: false
                         }
-                    })), { execQuery: function (query) { return client.query(query); }, validateChecksums: false });
+                    })), { validateChecksums: false });
                     postgrator = new postgrator_1["default"](options);
                     _a.label = 1;
                 case 1:
