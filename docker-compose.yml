@@ -9,6 +9,7 @@ services:
       POSTGRES_PASSWORD: password
   tm-app:
     image: taskmanager/igorbraz:latest
+    restart: 'always'
     ports:
       - '80:3001'
     env_file:

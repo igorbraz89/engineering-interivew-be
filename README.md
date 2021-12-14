@@ -11,7 +11,7 @@ https://miro.com/app/board/uXjVOb9JShc=/?invite_link_id=867348560105
 # How to run
 Create a `.env` file and add the following variables:
 ```
-DATABASE_URL=tcp://postgres:password@localhost:5432/postgres4
+DATABASE_URL=tcp://postgres:password@localhost:5433/postgres
 DATABASE_SSL=false
 DISABLE_HTTPS=true
 ```
