@@ -6,6 +6,7 @@ import {SavedAccount} from "./accounts";
 
 type TaskDBType = {
   name: string;
+  description?: string;
   status: 'to_do' | 'in_progress' | 'done' | 'archived';
 }
 
@@ -17,6 +18,7 @@ function mapRow(row) {
   return (row && {
     id: row.id,
     name: row.name,
+    description: row.description,
     status: row.status,
     createdBy: row.created_by,
     updatedBy: row.updated_by

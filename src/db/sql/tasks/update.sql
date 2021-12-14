@@ -1,5 +1,6 @@
 UPDATE tasks t
     SET name = ${name},
+        description = ${description},
         status = ${status},
         updated_by = ${accountId}
 WHERE id = ${id} and (

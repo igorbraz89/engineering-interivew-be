@@ -1,3 +1,3 @@
-INSERT INTO tasks(name, status, created_by, updated_by)
-VALUES(${name}, ${status}, ${accountId}, ${accountId})
+INSERT INTO tasks(name, description, status, created_by, updated_by)
+VALUES(${name}, ${description}, ${status}, ${accountId}, ${accountId})
 RETURNING *;

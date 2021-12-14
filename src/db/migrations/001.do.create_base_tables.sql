@@ -14,11 +14,13 @@ CREATE TYPE status_type AS ENUM ('to_do', 'in_progress', 'done', 'archived');
 
 CREATE TABLE tasks
 (
-    id         serial CONSTRAINT tasks_pkey PRIMARY KEY,
-    name       text        NOT NULL,
-    status     status_type NOT NULL,
-    created_by integer     NOT NULL,
-    updated_by integer     NOT NULL,
+    id          serial
+        CONSTRAINT tasks_pkey PRIMARY KEY,
+    name        text        NOT NULL,
+    description varchar(255),
+    status      status_type NOT NULL,
+    created_by  integer     NOT NULL,
+    updated_by  integer     NOT NULL,
     CONSTRAINT fk__task_created_by FOREIGN KEY (created_by) REFERENCES accounts (id) ON DELETE CASCADE,
     CONSTRAINT fk__task_updated_by FOREIGN KEY (updated_by) REFERENCES accounts (id) ON DELETE CASCADE
 

@@ -23,6 +23,7 @@ const accountsRef = accountsData.map((acc) => (
 const tasksData: TaskDBType[] = [
     {
         name: 'Study',
+        description: 'This is a test task',
         status: 'in_progress',
     }
 ]
