@@ -8,7 +8,6 @@ function nextId(seq) {
     sequences[seq] = nextValue;
     return nextValue;
 }
-
 const accountsData = [
     {
         name: 'Tester',
@@ -20,6 +19,14 @@ const accountsRef = accountsData.map((acc) => (
         id: nextId('accounts')
     })
 );
+const profilesRef = [
+    {
+        accountId: 0,
+        role: 'user',
+        active: 'true'
+    }
+]
+
 const tasksData: TaskDBType[] = [
     {
         name: 'Study',
@@ -35,4 +42,4 @@ const tasksRef = tasksData.map((acc) => (
     })
 );
 
-export { accountsData, accountsRef, tasksData, tasksRef }
+export { accountsData, accountsRef, tasksData, tasksRef, profilesRef }

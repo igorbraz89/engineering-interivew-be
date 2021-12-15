@@ -5,6 +5,7 @@ import {
     createAccount, retrieveAccountByUserName,
 } from './db/accounts';
 import { ConflictError } from './db/errors';
+import {createUserProfile, retrieveUserProfile} from "./db/profile";
 
 
 const setUpPassport = (db: ExtendedProtocolDB) => {
@@ -18,7 +19,8 @@ const setUpPassport = (db: ExtendedProtocolDB) => {
         if (!validAccount) {
           return done(null, false);
         }
-        return done(null, validAccount);
+        const { role } = await retrieveUserProfile(db, validAccount.id)
+        return done(null, {...validAccount, role });
       } catch (err) {
         return done(err);
       }
@@ -40,18 +42,16 @@ const setUpPassport = (db: ExtendedProtocolDB) => {
           null
         );
       }
-
-      try {
-        await db.tx(async (t: any) => {
-          const { password } = req.body;
-          await createAccount(t, req.body, password);
-        });
-      } catch (err) {
-        done(err, null);
-      }
-
-      const newAccount = await retrieveAccountByUserName(db, userName);
-      return done(null, newAccount);
+      return db.tx(async (t: any) => {
+           try {
+               const { password } = req.body;
+               const newAccount = await createAccount(t, req.body, password);
+               const { role } = await createUserProfile(t, { accountId: newAccount, role: 'user', active: true });
+               return done(null, { id: newAccount, role });
+           } catch (err) {
+               return done(err, null);
+           }
+      });
     })
   );
 
@@ -64,11 +64,12 @@ const setUpPassport = (db: ExtendedProtocolDB) => {
         if (user !== null) {
           done(
             null,
-            user || {
+              user || {
               id: 0,
               name: 'Tester',
               userName: 'test',
               authorized: true,
+              role: 'user',
             }
           );
         } else {

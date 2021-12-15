@@ -3,6 +3,7 @@ import Router from 'express-promise-router';
 import asyncHandler from "./async-handler";
 import { ensureAuthenticated } from "./auth";
 import {createTask, deleteTask, retrieveTasksByUser, updateTask} from "../db/tasks";
+import authorize from "../authorize";
 
 
 async function handleCreateTask(req: Request, res: Response) {
@@ -35,11 +36,13 @@ const tasksRouter = Router();
 tasksRouter.post(
     '/',
     ensureAuthenticated,
+    authorize('tasks', 'create'),
     asyncHandler(handleCreateTask)
 );
 tasksRouter.get(
     '/',
     ensureAuthenticated,
+    authorize('tasks', 'read'),
     asyncHandler(handleRetrieveTasks)
 );
 const taskRouter = Router({ mergeParams: true });
@@ -47,11 +50,13 @@ const taskRouter = Router({ mergeParams: true });
 taskRouter.put(
     '/',
     ensureAuthenticated,
+    authorize('tasks', 'update'),
     asyncHandler(handleUpdateTask)
 );
 taskRouter.delete(
     '/',
     ensureAuthenticated,
+    authorize('tasks', 'delete'),
     asyncHandler(handleDeleteTask)
 );
 export default tasksRouter;

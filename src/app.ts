@@ -4,7 +4,6 @@ import enforce from 'express-sslify';
 import morgan from 'morgan';
 import * as path from 'path';
 import * as fs from 'fs';
-import * as helmet from 'helmet';
 import { getDb } from './db/db';
 import setUpPassport from './passport-setup';
 import authRouter from './routes/auth';
@@ -12,27 +11,6 @@ import tasksRouter, { taskRouter } from "./routes/tasks";
 
 const db = getDb();
 const app = express();
-
-// Helmet security middleware -  It's easy to configure and provides a good set of validations to prevent common attacks
-app.use(
-  helmet.contentSecurityPolicy({
-    useDefaults: true,
-    directives: {
-      scriptSrc: ["'self'", "'unsafe-inline'"],
-      upgradeInsecureRequests: process.env.DISABLE_HTTPS === 'false' ? [] : null,
-    },
-  })
-);
-app.use(helmet.dnsPrefetchControl());
-app.use(helmet.expectCt());
-app.use(helmet.frameguard());
-app.use(helmet.hidePoweredBy());
-app.use(helmet.hsts());
-app.use(helmet.ieNoOpen());
-app.use(helmet.noSniff());
-app.use(helmet.permittedCrossDomainPolicies());
-app.use(helmet.referrerPolicy());
-app.use(helmet.xssFilter());
 
 // Logging system
 morgan.token('sessionid', (req) => {

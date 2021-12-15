@@ -26,11 +26,20 @@ CREATE TABLE tasks
 
 );
 
+CREATE TABLE profiles
+(
+    account_id integer NOT NULL,
+    role text not null,
+    active bool not null default false,
+    CONSTRAINT fk__profiles_account_id FOREIGN KEY (account_id) REFERENCES accounts (id) ON DELETE CASCADE,
+    CONSTRAINT uk__user_profile unique (account_id)
+);
+
 CREATE TABLE task_assignment
 (
     task_id    integer NOT NULL,
     account_id integer NOT NULL,
     CONSTRAINT fk__task_assignment_id FOREIGN KEY (task_id) REFERENCES accounts (id) ON DELETE CASCADE,
-    CONSTRAINT fk__task_assignment_account_id FOREIGN KEY (account_id) REFERENCES tasks (id) ON DELETE CASCADE,
+    CONSTRAINT fk__task_assignment_account_id FOREIGN KEY (account_id) REFERENCES accounts (id) ON DELETE CASCADE,
     CONSTRAINT uk__task_assignment unique (task_id, account_id)
 );

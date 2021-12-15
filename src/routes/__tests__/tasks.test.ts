@@ -5,15 +5,15 @@ import * as tasks from  '../../db/tasks';
 import { mockAuth } from './helpers';
 
 jest.mock('../../db/tasks');
-describe.each([true, false])('As authenticated: %s', (authenticate) => {
-  const agent = mockAuth(authenticate);
+describe.each([undefined, 'user'])('As authenticated: %s', (role) => {
+  const agent = mockAuth(role);
   it('Create task', async () => {
     tasks.createTask.mockResolvedValue(tasksRef[0]);
 
     const { body, statusCode } = await agent
         .post(`/api/tasks`)
         .set('Content-Type', 'application/json');
-    if (authenticate) {
+    if (role) {
       expect(statusCode).toEqual(200);
       expect(body).toMatchObject(tasksRef[0]);
     } else {
@@ -27,7 +27,7 @@ describe.each([true, false])('As authenticated: %s', (authenticate) => {
     const { body, statusCode } = await agent
         .put(`/api/task/${updatedTask.id}`)
         .set('Content-Type', 'application/json');
-    if (authenticate) {
+    if (role) {
       expect(statusCode).toEqual(200);
       expect(body).toMatchObject(updatedTask);
     } else {
@@ -40,7 +40,7 @@ describe.each([true, false])('As authenticated: %s', (authenticate) => {
     const { body, statusCode } = await agent
         .get(`/api/tasks`)
         .set('Content-Type', 'application/json');
-    if (authenticate) {
+    if (role) {
       expect(statusCode).toEqual(200);
       expect(body).toMatchObject(tasksRef[0]);
     } else {
@@ -52,7 +52,7 @@ describe.each([true, false])('As authenticated: %s', (authenticate) => {
     const { body, statusCode } = await agent
       .delete(`/api/task/${tasksRef[0].id}`)
       .set('Content-Type', 'application/json');
-    if (authenticate) {
+    if (role) {
       expect(statusCode).toEqual(200);
       expect(body).toMatchObject(tasksRef[0]);
     } else {

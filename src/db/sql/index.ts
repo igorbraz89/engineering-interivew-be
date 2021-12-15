@@ -18,8 +18,13 @@ const tasks = {
     delete: sql('tasks/delete.sql'),
     update: sql('tasks/update.sql'),
 }
-
+const profiles = {
+    create: sql('profiles/create.sql'),
+    retrieve: sql('profiles/retrieve.sql'),
+    update: sql('profiles/update.sql'),
+}
 export {
     accounts,
     tasks,
+    profiles
 };
