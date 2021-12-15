@@ -1,4 +1,5 @@
 import {TaskDBType} from "../db/tasks";
+import {ProfileDBType} from "../db/profiles";
 
 const sequences = {};
 
@@ -19,11 +20,11 @@ const accountsRef = accountsData.map((acc) => (
         id: nextId('accounts')
     })
 );
-const profilesRef = [
+const profilesRef: ProfileDBType[] = [
     {
-        accountId: 0,
+        accountId: accountsRef[0].id,
         role: 'user',
-        active: 'true'
+        active: true
     }
 ]
 

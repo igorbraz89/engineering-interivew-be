@@ -1,8 +1,9 @@
 import pgTmp from "pg-tmp";
 import { getDb, migrate } from "../db";
-import { accountsData, accountsRef, tasksData } from "../../__mocks__/data";
+import {accountsData, accountsRef, profilesRef, tasksData} from "../../__mocks__/data";
 import { createAccount } from "../accounts";
 import { createTask } from "../tasks";
+import {createUserProfile} from "../profiles";
 
 const sampleAccount = accountsRef[0];
 function hookUpTestDB() {
@@ -40,4 +41,13 @@ const seedTasks = (getDB) => {
         }
     });
 }
-export { hookUpTestDB, seedAccounts, seedTasks }
+const seedProfiles = (getDB) => {
+    beforeEach(async () => {
+        for (let i = 0; i < profilesRef.length; i += 1) {
+            // Guarantees order of insertion
+            // eslint-disable-next-line no-await-in-loop
+            await createUserProfile(getDB(), profilesRef[i]);
+        }
+    });
+}
+export { hookUpTestDB, seedAccounts, seedTasks, seedProfiles }

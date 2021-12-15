@@ -5,7 +5,7 @@ import {
     createAccount, retrieveAccountByUserName,
 } from './db/accounts';
 import { ConflictError } from './db/errors';
-import {createUserProfile, retrieveUserProfile} from "./db/profile";
+import {createUserProfile, retrieveUserProfile} from "./db/profiles";
 
 
 const setUpPassport = (db: ExtendedProtocolDB) => {

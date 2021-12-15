@@ -1,7 +1,7 @@
 import { AccessControl } from 'accesscontrol';
 import type { RequestHandler } from 'express';
 import asyncHandler from './routes/async-handler';
-import {retrieveUserProfile} from "./db/profile";
+import {retrieveUserProfile} from "./db/profiles";
 
 const accessControl = new AccessControl();
 accessControl

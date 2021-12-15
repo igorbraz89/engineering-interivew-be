@@ -6,10 +6,10 @@ import enforce from 'express-sslify';
 
 import app from '../../app';
 import * as accounts from '../../db/accounts';
-import * as profile from '../../db/profile';
+import * as profile from '../../db/profiles';
 
 jest.mock('../../db/accounts');
-jest.mock('../../db/profile');
+jest.mock('../../db/profiles');
 
 
 function mockAuth(role) {
